@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smrithi — About Me</title>
+    <style>
+        :root {
+            --bg-top: #1b1c31;
+            --bg-bottom: #121824;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --card-hover-border: rgba(192, 132, 252, 0.3);
+            
+            --text-main: #f1f5f9;
+            --text-muted: #cbd5e1;
+            
+            --accent-gradient: linear-gradient(135deg, #e9d5ff 0%, #a855f7 50%, #818cf8 100%);
+            --card-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            --email-glow: linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(129, 140, 248, 0.15) 100%);
+            --border-glow: rgba(168, 85, 247, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(160deg, var(--bg-top), var(--bg-bottom));
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.75;
+            padding: 3rem 1.25rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 3.5rem;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: -0.02em;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 1.8rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: #f3e8ff;
+            text-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
+        }
+
+        h1 {
+            font-size: 2.75rem;
+            margin-bottom: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #ffffff 0%, #e9d5ff 50%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 1.45rem;
+            margin: 2.5rem 0 1rem 0;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #e9d5ff 0%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+            font-weight: 400;
+        }
+
+        .highlight-box {
+            background: var(--card-gradient);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+        }
+
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1.2rem;
+        }
+
+        .interest-card {
+            background: var(--card-gradient);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(8px);
+            padding: 1.3rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        .interest-card:hover {
+            border-color: var(--card-hover-border);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.25);
+        }
+
+        .contact-box {
+            background: var(--email-glow);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.2rem 1.6rem;
+            margin-top: 1.2rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .contact-box:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+        }
+
+        .email-link {
+            color: #f3e8ff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            transition: color 0.2s ease;
+        }
+
+        .email-link:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 4.5rem;
+            border-top: 1px solid var(--card-border);
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.88rem;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">My Canvas</div>
+            <nav>
+                <a href="index.html" class="active">About</a>
+                <a href="portfolio.html">Portfolio</a>
+            </nav>
+        </header>
+
+        <main>
+            <section>
+                <h1>Hola, I'm Smrithi.</h1>
+                <p>Welcome to my digital home base. I am a student based out of India. Beyond my professional pursuits, I deeply value curiosity, continuous learning, and exploring how things work.</p>
+            </section>
+
+            <div class="highlight-box">
+                <h2>My Philosophy</h2>
+                <p>I believe that simplicity is the ultimate sophistication. Whether I am building a project, writing, or solving everyday problems, I strive for clarity, intent, and authentic craftsmanship.</p>
+            </div>
+
+            <section>
+                <h2>When I'm Not Working</h2>
+                <p>Away from screens and keyboards, you can usually find me diving into my personal hobbies and interests:</p>
+                
+                <div class="interests-grid">
+                    <div class="interest-card">📖 Reading Non fiction — Always exploring history and psychology books</div>
+                    <div class="interest-card">☕ Hot Hazelnut coffee — Having every sip of it like it was an elixir from heaven</div>
+                    <div class="interest-card">🎧 Indian classical and western pop music — Reminding myself that there is more to life and enjoying the present moment</div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Let's Connect</h2>
+                <p>I always enjoy meeting kindred spirits, collaborators, or curious visitors. Feel free to reach out to me directly:</p>
+                <div class="contact-box">
+                    <a href="mailto:your.email@example.com" class="email-link">your.email@example.com</a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Smrithi. Built cleanly for the web.</p>
+        </footer>
+    </div>
+
+</body>
+</html>

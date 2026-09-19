@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smrithi — Portfolio</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #181926 0%, #1e1e2e 50%, #24273a 100%);
+            --card-bg: rgba(30, 32, 48, 0.75);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-main: #cad3f5;
+            --text-muted: #a5adce;
+            --heading-gradient: linear-gradient(135deg, #f4dbd6 0%, #f5bde6 50%, #c6a0f6 100%);
+            --accent: #c6a0f6;
+            --accent-glow: rgba(198, 160, 246, 0.15);
+            
+            /* === ADDED / CHANGED: Colors for LinkedIn style mockup === */
+            --linkedin-blue: #0a66c2;
+            --banner-default: linear-gradient(90deg, #1d4ed8 0%, #3b82f6 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            background: var(--heading-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            background: var(--heading-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin: 2.5rem 0 1rem 0;
+            background: var(--heading-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            color: var(--text-main);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0 1.5rem 0;
+        }
+
+        .tag {
+            background: rgba(198, 160, 246, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(198, 160, 246, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .project-features {
+            list-style: none;
+            margin: 1rem 0 1.5rem 0;
+        }
+
+        .project-features li {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .project-features li::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .pdf-action-group {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .btn-pdf {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(198, 160, 246, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(198, 160, 246, 0.3);
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-pdf:hover {
+            background-color: var(--accent);
+            color: #181926;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background-color: transparent;
+            box-shadow: none;
+        }
+
+        .pdf-display-box {
+            display: none;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+
+        .hide-btn {
+            margin-bottom: 1rem;
+        }
+
+        .pdf-display-box iframe {
+            width: 100%;
+            height: 600px;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            background: rgba(15, 16, 24, 0.6);
+            display: block;
+        }
+
+        /* === ADDED / CHANGED: Styles for LinkedIn Mockup Section === */
+        .profile-mockup-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 2.5rem 0;
+            backdrop-filter: blur(8px);
+        }
+
+        .banner-container {
+            width: 100%;
+            height: 140px;
+            background: var(--banner-default);
+            position: relative;
+        }
+
+        .banner-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-header-content {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            position: relative;
+        }
+
+        .avatar-container {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid #1e1e2e;
+            background-color: #313244;
+            margin-top: -50px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info {
+            margin-top: 1rem;
+        }
+
+        .profile-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .profile-headline {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+        }
+
+        .profile-badge {
+            display: inline-block;
+            background-color: var(--linkedin-blue);
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .metrics-bar {
+            display: flex;
+            background: rgba(15, 16, 24, 0.4);
+            border-top: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--card-border);
+            padding: 0.8rem 1.5rem;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .metric-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .metric-value {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .featured-preview-grid {
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .preview-box {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .preview-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.4rem;
+        }
+
+        .preview-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .skill-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 1.2rem;
+            border-radius: 8px;
+            backdrop-filter: blur(8px);
+        }
+
+        .skill-title {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .contact-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            display: inline-block;
+            backdrop-filter: blur(8px);
+        }
+
+        .contact-card a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: opacity 0.2s ease;
+        }
+
+        .contact-card a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 4rem;
+            border-top: 1px solid var(--card-border);
+            padding-top: 1.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">Smrithi</div>
+            <nav>
+                <a href="index.html">About</a>
+                <a href="portfolio.html" class="active">Portfolio</a>
+            </nav>
+        </header>
+
+        <main>
+            <section>
+ <!-- === ADDED / CHANGED: LinkedIn Style Portfolio & Banner Section === -->
+            <section>
+                <h2>Professional Profile Overview</h2>
+                <div class="profile-mockup-card">
+                    <!-- Banner Container -->
+                    <div class="banner-container">
+                        <!-- 
+                            =========================================================
+                            LOCATION 1: PORTFOLIO BANNER IMAGE
+                            Replace 'banner-image.jpg' with your actual banner image path!
+                            =========================================================
+                        -->
+                        <img src="banner.jpg" alt="Portfolio Banner Image" onerror="this.style.display='none';">
+                    </div>
+
+                    <!-- Profile Avatar & Details -->
+                    <div class="profile-header-content">
+                        <div class="avatar-container">
+                            <!-- 
+                                =========================================================
+                                LOCATION 2: PORTFOLIO PROFILE / AVATAR IMAGE
+                                Replace 'profile-photo.jpg' with your actual profile picture path!
+                                =========================================================
+                            -->
+                            <img src="a.jpg" alt="Smrithi Profile Photo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%23a5adce\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';">
+                        </div>
+
+                        <div class="profile-info">
+                            <div class="profile-name">Smrithi</div>
+                            <div class="profile-headline">CRM Analyst & Business Operations Strategist</div>
+                            <span class="profile-badge">LinkedIn Verified Profile</span>
+                        </div>
+                    </div>
+
+                    <!-- Metrics / Activity Highlights Bar -->
+                    <div class="metrics-bar">
+                        <div class="metric-item">
+                            <span>Profile Strength:</span>
+                            <span class="metric-value">All-Star</span>
+                        </div>
+                        <div class="metric-item">
+                            <span>Featured Content:</span>
+                            <span class="metric-value">3 Articles</span>
+                        </div>
+                        <div class="metric-item">
+                            <span>Network Engagement:</span>
+                            <span class="metric-value">Active</span>
+                        </div>
+                    </div>
+
+                    <!-- Featured Portfolio Posts Preview -->
+                    <div class="featured-preview-grid">
+                        <div class="preview-box">
+                            <div class="preview-title">CRM Case Study</div>
+                            <div class="preview-desc">Analysis of customer care across ISP, Hospitality, and Retail.</div>
+                        </div>
+                        <div class="preview-box">
+                            <div class="preview-title">LRI Framework</div>
+                            <div class="preview-desc">Listen-Respond-Improve operational methodology.</div>
+                        </div>
+                        <div class="preview-box">
+                            <div class="preview-title">Featured PDF</div>
+                            <div class="preview-desc">Complete project documentation & service strategies.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- === END OF ADDED SECTION === -->
+
+	    </section>   
+
+
+
+            <section>
+                <h1>Featured Work</h1>
+                <p>Explore my highlighted project, documentation, and core technical competencies.</p>
+            </section>
+
+            <!-- Featured Project Section -->
+            <div class="project-card">
+                <div class="project-title">Demonstrating Customer Care in Different Service Industries</div>
+                <p>This Customer Relationship Management (CRM) study analyzes how customer care is demonstrated across three distinct service domains: telecom/ISPs, hospitality, and retail electronics. It identifies operational delivery challenges—such as high-stress complaint handling, rush-hour order management, and complex sales consultations—and proposes practical frameworks for active listening, empathetic communication, and process improvements.</p>
+
+                <div class="tech-tags">
+                    <span class="tag">Relationship Management (CRM)</span>
+                    <span class="tag">LRI (Listen-Respond-Improve) Model</span>
+                    <span class="tag">Qualitative Analysis</span>
+                </div>
+
+                <ul class="project-features">
+                    <li>Multi-Industry Service Analysis: Evaluates customer care dynamics across complaint resolution (ISP), positive dining experiences (hospitality), and personalized sales assistance (retail electronics).</li>
+                    <li>Challenge & Conflict Identification: Pinpoints primary operational hurdles including emotional customers, rush-hour volume, dietary management, and technical information overload.</li>
+                    <li>Structured LRI Framework: Applies a "Listen, Respond, Improve" model to optimize front-line staff interactions and implement long-term service improvements.</li>
+                </ul>
+
+                <!-- Primary Action Buttons -->
+                <div class="pdf-action-group" id="mainPdfButtons">
+                    <button class="btn-pdf" onclick="togglePdfViewer()">📄 View Project PDF (Embedded)</button>
+                </div>
+
+                <!-- Embedded PDF Display Container -->
+                <div class="pdf-display-box" id="pdfContainer">
+                    <button class="btn-pdf hide-btn" onclick="togglePdfViewer()">✕ Hide PDF Viewer</button>
+                    <iframe src="Demonstrating Customer Care in Different Service Industries .pdf#toolbar=1" id="pdfFrame" title="Project Document PDF"></iframe>
+                </div>
+            </div>
+
+           <!-- Skills Section -->
+            <section>
+                <h2>Skills & Tools</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-title">Technical Analysis</div>
+                        <p style="font-size:0.9rem; margin:0;">Price Action, Candlesticks, Market Research</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-title">Tools & Platforms</div>
+                        <p style="font-size:0.9rem; margin:0;">Moneycontrol, HTML5, CSS3, JavaScript</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-title">Core Strengths</div>
+                        <p style="font-size:0.9rem; margin:0;">Problem Solving, Trend Analysis, CRM</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section>
+                <h2>Get In Touch</h2>
+                <p>Interested in collaborating or discussing a project? Feel free to email me directly:</p>
+                <div class="contact-card">
+                    <a href="mailto:your.email@example.com">your.email@example.com</a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Smrithi. Built cleanly for the web.</p>
+        </footer>
+    </div>
+
+    <script>
+        function togglePdfViewer() {
+            const pdfContainer = document.getElementById('pdfContainer');
+            const mainPdfButtons = document.getElementById('mainPdfButtons');
+
+            if (pdfContainer.style.display === 'flex') {
+                pdfContainer.style.display = 'none';
+                mainPdfButtons.style.display = 'flex';
+            } else {
+                pdfContainer.style.display = 'flex';
+                mainPdfButtons.style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>
